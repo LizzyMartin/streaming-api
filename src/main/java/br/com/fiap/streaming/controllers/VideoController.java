@@ -2,6 +2,7 @@ package br.com.fiap.streaming.controllers;
 
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
@@ -42,10 +43,12 @@ public class VideoController {
     private final RecommendationService recommendationService;
 
     @GetMapping
-    public Mono<Page<Video>> findAllVideos(Pageable pageable,
+    public Mono<Page<Video>> findAllVideos(@RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
             @RequestParam(value = "title", required = false) String title,
             @RequestParam(value = "category", required = false) String category,
             @RequestParam(value = "publicationDate", required = false) String publicationDate) {
+        Pageable pageable = PageRequest.of(page, size);
         return videoService.findAllVideos(pageable, title, category, publicationDate);
     }
 

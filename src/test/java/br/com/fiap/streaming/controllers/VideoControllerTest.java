@@ -190,7 +190,7 @@ public class VideoControllerTest {
 
         when(videoService.findAllVideos(pageable, title, category, publicationDate)).thenReturn(Mono.just(videos));
 
-        Mono<Page<Video>> result = videoController.findAllVideos(pageable, title, category, publicationDate);
+        Mono<Page<Video>> result = videoController.findAllVideos(0, 10, title, category, publicationDate);
 
         StepVerifier.create(result)
                 .expectNext(videos)
