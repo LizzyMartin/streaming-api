@@ -1,0 +1,28 @@
+spring:
+  codec:
+    max-in-memory-size: 200MB
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 200MB
+      max-request-size: 200MB
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+  main:
+    allow-bean-definition-overriding: true
+    allow-circular-references: true
+  data:
+    mongodb:
+      uri: mongodb+srv://user:password@video-streaming-cluster.we9l03d.mongodb.net/video-db
+  application:
+    name: video-streaming-api
+
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
+        security: DEBUG
+
+server:
+  port: 8080
